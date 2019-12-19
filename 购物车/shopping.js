@@ -52,26 +52,16 @@ var countList = document.getElementsByClassName("count");
 //添加表格
 for (var i = 0; i < carProducts.length; i++) {
   var tr = document.createElement("tr");
+  tr.innerHTML = "<td><input type='checkbox'></td>" + 
+                 "<td>" + carProducts[i].name + "</td>" +
+                 "<td class='price'>" + carProducts[i].price + "</td>" +
+                 "<td class='count'>" + 
+                   "<button class='cut'>-</button>" +  
+                   "<span>"+ carProducts[i].count +"</span>" + 
+                   "<button class='plus'>+</button>" +
+                 "</td>" +
+                 "<td class='item-sum'> " + carProducts[i].count * carProducts[i].price + "</td>" 
   tbody.insertBefore(tr, sumRow);
-  var checked = document.createElement("td");
-  checked.innerHTML = "<input type='checkbox'>";
-  tr.appendChild(checked);
-  var itemName = document.createElement("td");
-  itemName.innerHTML = carProducts[i].name;
-  tr.appendChild(itemName);
-  var price = document.createElement("td");
-  price.className = "price";
-  price.innerHTML = carProducts[i].price;
-  tr.appendChild(price);
-  var count = document.createElement("td");
-  count.className = "count";
-  var countNumber = carProducts[i].count;
-  count.innerHTML = "<button class='cut'>-</button>" + "<span>"+ countNumber +"</span>" + "<button class='plus'>+</button>";
-  tr.appendChild(count);
-  var itemSum = document.createElement("td");
-  itemSum.className = "item-sum"
-  itemSum.innerHTML = countNumber * price.innerHTML;
-  tr.appendChild(itemSum);
 }
 
 //按加号增加数量
