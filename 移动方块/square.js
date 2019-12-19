@@ -11,11 +11,23 @@ moveBox.onmousedown = function (e) {
     if (moveX <= (box.offsetWidth - moveBox.offsetWidth) 
         && moveX > 0) {
       moveBox.style.left = moveX + "px";
+    }
+    else if (moveX <= 0) {
+      moveBox.style.left = 0 + "px";
+    }
+    else {
+      moveBox.style.left = box.offsetWidth - moveBox.offsetWidth + "px";
     };
     if (moveY <= (box.offsetHeight - moveBox.offsetHeight) 
         && moveY > 0) {
       moveBox.style.top = moveY + "px";
-    };
+    }
+    else if (moveY <= 0) {
+      moveBox.style.top = 0 + "px";
+    }
+    else {
+      moveBox.style.top = box.offsetHeight - moveBox.offsetHeight + "px";
+    };;
     if ((moveX >= (fixedBox.offsetLeft - moveBox.offsetWidth))
         && (moveX <= (fixedBox.offsetLeft + fixedBox.offsetWidth))
         && (moveY >= (fixedBox.offsetTop - moveBox.offsetHeight))
