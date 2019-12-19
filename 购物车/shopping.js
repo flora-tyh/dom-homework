@@ -49,7 +49,6 @@ var tr = document.getElementsByTagName("tr");
 var sum = document.getElementsByClassName("sum")[0];
 var countList = document.getElementsByClassName("count");
 
-
 //添加表格
 for (var i = 0; i < carProducts.length; i++) {
   var tr = document.createElement("tr");
@@ -74,8 +73,6 @@ for (var i = 0; i < carProducts.length; i++) {
   itemSum.innerHTML = countNumber * price.innerHTML;
   tr.appendChild(itemSum);
 }
-
-
 
 //按加号增加数量
 function countAdd(e) {
