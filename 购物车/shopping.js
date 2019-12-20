@@ -48,11 +48,16 @@ var tbody = document.getElementsByTagName("tbody")[0];
 var tr = document.getElementsByTagName("tr");
 var sum = document.getElementsByClassName("sum")[0];
 var countList = document.getElementsByClassName("count");
+var checkBox = document.getElementsByClassName("check-box");
 
 //添加表格
 for (var i = 0; i < carProducts.length; i++) {
   var tr = document.createElement("tr");
-  tr.innerHTML = "<td><input type='checkbox'></td>" + 
+  var checked = "";
+  if (carProducts[i].checked) {
+    checked = "checked"
+  }
+  tr.innerHTML = "<td><input type='checkbox' class='check-box'" + checked + "></td>" + 
                  "<td>" + carProducts[i].name + "</td>" +
                  "<td class='price'>" + carProducts[i].price + "</td>" +
                  "<td class='count'>" + 
@@ -63,6 +68,15 @@ for (var i = 0; i < carProducts.length; i++) {
                  "<td class='item-sum'> " + carProducts[i].count * carProducts[i].price + "</td>" 
   tbody.insertBefore(tr, sumRow);
 }
+var totalPrice = 0;
+var countTotal = 0;
+for (var i = 0, len = carProducts.length; i < carProducts.length; i++) {
+  if (checkBox[i].checked) {
+    totalPrice += parseFloat(tbody.children[i+1].lastChild.innerText);
+    countTotal += parseFloat(countList[i].children[1].innerText);
+    }
+  };
+sum.innerHTML = "共计" + countTotal + "件商品，" + totalPrice + "￥";
 
 //按加号增加数量
 function countAdd(e) {
@@ -97,8 +111,8 @@ function changeSum(e) {
   if (rowIndex < tbody.rows.length-1) {
     trCurrnt.lastChild.innerText = trCurrnt.children[2].innerText * countList[rowIndex - 1].children[1].innerText;
   };
-  var totalPrice = 0;
-  var countTotal = 0;
+  totalPrice = 0;
+  countTotal = 0;
   for (var i = 1, len = tbody.rows.length; i < len - 1; i++) {
     if (tbody.children[i].firstChild.firstChild.checked) {
       totalPrice += parseFloat(tbody.children[i].lastChild.innerText);
@@ -119,9 +133,9 @@ tbody.addEventListener("click", changeSum);
 var btnPlus = [];
 var btnCut = [];
 for (let id = 0, carProductsLen = carProducts.length; id < carProductsLen; id++) {
-  btnPlus[id] = document.getElementsByClassName("count")[id].children[2];
+  btnPlus[id] = document.getElementsByClassName("plus")[id];
   btnPlus[id].addEventListener("click", countAdd);
-  btnCut[id] = document.getElementsByClassName("count")[id].children[0];
+  btnCut[id] = document.getElementsByClassName("cut")[id];
   btnCut[id].addEventListener("click", countCut);
 }
 
